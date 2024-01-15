@@ -1,0 +1,42 @@
+.friend_container{
+    width: 300px;
+
+    margin: 20px 0px;
+    padding: 10px 10px;
+
+    color: #111111;
+    background-color: #FFFEFE;
+    border-radius: 8px;
+
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.friend_container svg{
+    background-color: #D9D9D9;
+    padding: 4px 4px;
+    border-radius: 10px;
+}
+
+.friend_container svg:hover{
+    background-color: #c1c1c1;
+    transition: 0.3s ease-in-out;
+}
+
+.friend_container svg:active{
+    background-color: #333333;
+    transition: 0.1s ease-in;
+}
+
+/* .btn_container{
+    background-color: #D9D9D9;
+    height: 42px;
+    width: 42px;
+    text-align: center;
+    border-radius: 12px;
+} */
