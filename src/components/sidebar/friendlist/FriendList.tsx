@@ -12,7 +12,7 @@ const FriendList = ({data} : FriendListProps) => {
     return(
         <div className={styles.friendlist_container}>
             {data?.map(friend => {
-                return <Friend name={friend.name}></Friend>
+                return <Friend key={friend.name.toString()} name={friend.name}></Friend>
             })}
         </div>
     )
