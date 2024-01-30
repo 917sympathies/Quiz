@@ -3,15 +3,21 @@ import React, {useState, useEffect} from 'react'
 import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./style.module.css"
+import { redirect } from 'next/navigation'
 
-interface IQuestionPack{
+export interface IQuestionPack{
     id: number,
     theme: string
+}
+
+export interface IPlayer{
+    username: string
 }
 
 export default function DashboardPage(){
     const [selectedQuestionPack, setSelectedQuestionPack] = useState<IQuestionPack>();
     const [questionPackList, setQuestionPackList] = useState<IQuestionPack[]>([]);
+    const [playersList, setPlayersList] = useState<IPlayer[]>([])
 
     useEffect(() => {
         fetch("http://localhost:5000/api/QuestionPack", {
@@ -34,8 +40,15 @@ export default function DashboardPage(){
         }
     }
 
-    const handleStartGame = () => {
+    const handleStartGame = async () => {
         console.log(`You've selected quiz pack ${selectedQuestionPack?.theme}. Game start button was pressed!`);
+        const response = await fetch("http://localhost:5000/api/Game", {
+            method: "POST",
+            body: JSON.stringify(playersList),
+            headers : {"Content-Type" : "application/json"}
+        });
+        const game = await response.json();
+        redirect(`/game/${game.id}`);
     };
 
     return(
