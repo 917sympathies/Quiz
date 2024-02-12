@@ -5,8 +5,12 @@ import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./style.module.css"
 import { redirect } from 'next/navigation'
 
+const playersMock = [
+    "asd"
+];
+
 export interface IQuestionPack{
-    id: number,
+    id: string,
     theme: string
 }
 
@@ -41,10 +45,11 @@ export default function DashboardPage(){
     }
 
     const handleStartGame = async () => {
-        console.log(`You've selected quiz pack ${selectedQuestionPack?.theme}. Game start button was pressed!`);
-        const response = await fetch("http://localhost:5000/api/Game", {
+
+        console.log(JSON.stringify(playersMock))
+        const response = await fetch(`http://localhost:5000/api/Game?questionPackId=${selectedQuestionPack.id}`, {
             method: "POST",
-            body: JSON.stringify(playersList),
+            body: JSON.stringify(playersMock),
             headers : {"Content-Type" : "application/json"}
         });
         const game = await response.json();
