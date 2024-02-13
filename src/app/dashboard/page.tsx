@@ -3,10 +3,10 @@ import React, {useState, useEffect} from 'react'
 import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./style.module.css"
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const playersMock = [
-    "asd"
+    "rin"
 ];
 
 export interface IQuestionPack{
@@ -21,7 +21,9 @@ export interface IPlayer{
 export default function DashboardPage(){
     const [selectedQuestionPack, setSelectedQuestionPack] = useState<IQuestionPack>();
     const [questionPackList, setQuestionPackList] = useState<IQuestionPack[]>([]);
-    const [playersList, setPlayersList] = useState<IPlayer[]>([])
+    const [playersList, setPlayersList] = useState<IPlayer[]>([]);
+
+    const router = useRouter();
 
     useEffect(() => {
         fetch("http://localhost:5000/api/QuestionPack", {
@@ -53,7 +55,8 @@ export default function DashboardPage(){
             headers : {"Content-Type" : "application/json"}
         });
         const game = await response.json();
-        redirect(`/game/${game.id}`);
+        console.log(game);
+        router.push(`game/${game.id}`)
     };
 
     return(
